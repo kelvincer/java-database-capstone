@@ -56,3 +56,79 @@
     - Log the error to the console
     - Show a generic error message
 */
+
+import { openModal } from '../components/modals.js';
+import { API_BASE_URL } from '../config/config.js';
+import { selectRole } from '../render.js';
+
+const ADMIN_API = API_BASE_URL + '/admin';
+const DOCTOR_API = API_BASE_URL + '/doctor/login';
+
+window.onload = function () {
+    const adminLoginBtn = document.getElementById('adminLogin');
+    const doctorLoginBtn = document.getElementById('doctorLogin');
+
+    if (adminLoginBtn) {
+        adminLoginBtn.addEventListener('click', () => openModal('adminLogin'));
+    }
+
+    if (doctorLoginBtn) {
+        doctorLoginBtn.addEventListener('click', () => openModal('doctorLogin'));
+    }
+};
+
+window.adminLoginHandler = async function () {
+    try {
+        const username = document.getElementById('adminUsername').value;
+        const password = document.getElementById('adminPassword').value;
+
+        const admin = { username, password };
+
+        const response = await fetch(ADMIN_API, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(admin)
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            const token = data.token;
+
+            localStorage.setItem('token', token);
+            selectRole('admin');
+        } else {
+            alert('Invalid credentials. Please try again.');
+        }
+    } catch (error) {
+        alert('Something went wrong. Please try again later.');
+        console.error('Admin login error:', error);
+    }
+};
+
+window.doctorLoginHandler = async function () {
+    try {
+        const email = document.getElementById('doctorEmail').value;
+        const password = document.getElementById('doctorPassword').value;
+
+        const doctor = { email, password };
+
+        const response = await fetch(DOCTOR_API, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(doctor)
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            const token = data.token;
+
+            localStorage.setItem('token', token);
+            selectRole('doctor');
+        } else {
+            alert('Invalid credentials. Please try again.');
+        }
+    } catch (error) {
+        alert('Something went wrong. Please try again later.');
+        console.error('Doctor login error:', error);
+    }
+};
