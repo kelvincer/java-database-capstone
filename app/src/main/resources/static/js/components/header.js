@@ -124,6 +124,7 @@
 */
 
 import { openModal } from './modals.js';
+import { selectRole } from '../render.js';
 
 function renderHeader() {
 
@@ -158,7 +159,7 @@ function renderHeader() {
 		return;
 	} else if (role === "admin") {
 		headerContent += `
-		  <button id="addDocBtn" class="adminBtn" onclick="openModal('addDoctor')">Add Doctor</button>
+		  <button id="addDocBtn" class="adminBtn">Add Doctor</button>
 		  <a href="#" onclick="logout()">Logout</a>`;
 	} else if (role === "doctor") {
 		headerContent += `
@@ -200,11 +201,22 @@ function attachHeaderButtonListeners() {
 	}
 }
 
+window.selectRole = selectUserRole;
+
+function selectUserRole(role) {
+	selectRole(role);
+}
+
+window.logout = logout;
+
 function logout() {
 	localStorage.removeItem("userRole");
 	localStorage.removeItem("token");
-	window.location.href = "/";
+	window.location.replace("/");
+	//window.location.href = "/";
 }
+
+window.logoutPatient = logoutPatient;
 
 function logoutPatient() {
 	localStorage.removeItem("token");

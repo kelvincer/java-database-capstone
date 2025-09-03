@@ -11,4 +11,5 @@
  *   fetch(`${API_BASE_URL}/api/appointments`)
  */
 
+// https://my-coursera-app.theia.host
 export const API_BASE_URL = "http://localhost:8080";

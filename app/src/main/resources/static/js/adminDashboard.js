@@ -77,14 +77,14 @@ import { createDoctorCard } from './components/doctorCard.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     loadDoctorCards();
-});
 
-const addDoctorBtn = document.getElementById('addDoctorBtn');
-if (addDoctorBtn) {
-    addDoctorBtn.addEventListener('click', () => {
-        openModal('addDoctor');
-    });
-}
+    const addDoctorBtn = document.getElementById('addDocBtn');
+    if (addDoctorBtn) {
+        addDoctorBtn.addEventListener('click', () => {
+            openModal('addDoctor');
+        });
+    }
+});
 
 export async function loadDoctorCards() {
     try {
@@ -101,8 +101,8 @@ export async function loadDoctorCards() {
 
 const contentDiv = document.getElementById('content');
 const searchInput = document.getElementById('searchBar');
-const timeFilter = document.getElementById('timeFilter');
-const specialtyFilter = document.getElementById('specialtyFilter');
+const timeFilter = document.getElementById('filterTime');
+const specialtyFilter = document.getElementById('filterSpecialty');
 
 if (searchInput) searchInput.addEventListener('input', filterDoctorsOnChange);
 if (timeFilter) timeFilter.addEventListener('change', filterDoctorsOnChange);
@@ -143,8 +143,10 @@ export async function adminAddDoctor() {
     const email = document.getElementById('doctorEmail').value.trim();
     const phone = document.getElementById('doctorPhone').value.trim();
     const password = document.getElementById('doctorPassword').value.trim();
-    const specialty = document.getElementById('doctorSpecialty').value.trim();
-    const times = document.getElementById('doctorTimes').value.trim();
+    const specialty = document.getElementById('specialization').value.trim();
+
+    const checked = document.querySelectorAll('input[name="availability"]:checked');
+    const times = Array.from(checked).map(cb => cb.value);
 
     const token = localStorage.getItem('token');
     if (!token) {
@@ -168,3 +170,5 @@ export async function adminAddDoctor() {
         console.error('Error saving doctor:', error);
     }
 }
+
+window.adminAddDoctor = adminAddDoctor;

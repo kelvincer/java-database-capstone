@@ -62,7 +62,7 @@ const today = new Date();
 const year = today.getFullYear();
 const month = String(today.getMonth() + 1).padStart(2, '0');
 const day = String(today.getDate()).padStart(2, '0');
-const selectedDate = `${year}-${month}-${day}`;
+let selectedDate = `${year}-${month}-${day}`;
 
 const token = localStorage.getItem('token');
 let patientName = null;
@@ -76,7 +76,7 @@ searchBar.addEventListener('input', async (e) => {
 });
 
 const todayBtn = document.querySelector('#todayButton');
-const datePicker = document.querySelector('#datePicker');
+const datePicker = document.getElementById('datePicker');
 
 todayBtn.addEventListener('click', async () => {
     const now = new Date();
@@ -91,6 +91,7 @@ todayBtn.addEventListener('click', async () => {
 
 datePicker.addEventListener('change', async (e) => {
     selectedDate = e.target.value;
+    console.log("selectedDate", selectedDate);
     await loadAppointments();
 });
 
@@ -101,19 +102,19 @@ async function loadAppointments() {
 
         if (!data || !data.appointments || data.appointments.length === 0) {
             const row = document.createElement('tr');
-            row.innerHTML = `<td colspan="4" class="text-center">No Appointments found for today.</td>`;
+            row.innerHTML = `<td colspan="5" class="text-center">No Appointments found for today.</td>`;
             tableBody.appendChild(row);
             return;
         }
 
         data.appointments.forEach(app => {
             const patient = {
-                id: app.patientId,
-                name: app.patientName,
-                phone: app.patientPhone,
-                email: app.patientEmail
+                id: app.patient.id,
+                name: app.patient.name,
+                phone: app.patient.phone,
+                email: app.patient.email
             };
-            const row = createPatientRow(patient, app.id, app.doctorId);
+            const row = createPatientRow(patient, app.id, app.doctor.id);
             tableBody.appendChild(row);
         });
 
@@ -121,7 +122,7 @@ async function loadAppointments() {
         console.error(error);
         tableBody.innerHTML = '';
         const row = document.createElement('tr');
-        row.innerHTML = `<td colspan="4" class="text-center">Error loading appointments. Try again later.</td>`;
+        row.innerHTML = `<td colspan="5" class="text-center">Error loading appointments. Try again later.</td>`;
         tableBody.appendChild(row);
     }
 }

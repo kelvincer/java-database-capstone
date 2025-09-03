@@ -91,6 +91,11 @@ async function handleFilterChange() {
   const name = searchBarValue || null;
   const condition = filterValue === "allAppointments" ? null : filterValue || null;
 
+  if(!name) {
+    initializePage();
+    return;
+  }
+
   try {
     const response = await filterAppointments(condition, name, token);
     const appointments = response?.appointments || [];

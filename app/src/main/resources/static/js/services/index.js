@@ -61,12 +61,13 @@ import { openModal } from '../components/modals.js';
 import { API_BASE_URL } from '../config/config.js';
 import { selectRole } from '../render.js';
 
-const ADMIN_API = API_BASE_URL + '/admin';
+const ADMIN_API = API_BASE_URL + '/admin/login';
 const DOCTOR_API = API_BASE_URL + '/doctor/login';
 
 window.onload = function () {
     const adminLoginBtn = document.getElementById('adminLogin');
     const doctorLoginBtn = document.getElementById('doctorLogin');
+    const patientLoginBtn = document.getElementById('patientLogin');
 
     if (adminLoginBtn) {
         adminLoginBtn.addEventListener('click', () => openModal('adminLogin'));
@@ -75,16 +76,20 @@ window.onload = function () {
     if (doctorLoginBtn) {
         doctorLoginBtn.addEventListener('click', () => openModal('doctorLogin'));
     }
+
+    if (patientLoginBtn) {
+        patientLoginBtn.addEventListener('click', () => selectRole('patient'));
+    }
 };
 
 window.adminLoginHandler = async function () {
     try {
-        const username = document.getElementById('adminUsername').value;
-        const password = document.getElementById('adminPassword').value;
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
 
         const admin = { username, password };
 
-        const response = await fetch(ADMIN_API, {
+        const response = await fetch( ADMIN_API, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(admin)
@@ -107,8 +112,8 @@ window.adminLoginHandler = async function () {
 
 window.doctorLoginHandler = async function () {
     try {
-        const email = document.getElementById('doctorEmail').value;
-        const password = document.getElementById('doctorPassword').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
 
         const doctor = { email, password };
 

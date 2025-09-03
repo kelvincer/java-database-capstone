@@ -115,46 +115,45 @@ with search, filter, and modal functionality.
         <title>Admin Dashboard</title>
         <link rel="stylesheet" th:href="@{/assets/css/adminDashboard.css}" />
         <link rel="stylesheet" th:href="@{/assets/css/style.css}" />
-        <script th:src="@{/assets/js/render.js}" defer></script>
-        <script th:src="@{/assets/js/util.js}" defer></script>
-        <script th:src="@{/assets/js/components/header.js}" defer></script>
-        <script th:src="@{/assets/js/components/footer.js}" defer></script>
+        <script type="module" th:src="@{/js/render.js}" defer></script>
+        <script type="module" th:src="@{/js/util.js}" defer></script>
+        <script type="module" th:src="@{/js/components/header.js}" defer></script>
+        <script th:src="@{/js/components/footer.js}" defer></script>
     </head>
     <body onload="renderContent()">
         <div class="container">
             <div class="wrapper">
                 <div id="header"></div>
                 <main class="main-content">
-                    <input type="text" id="searchBar" placeholder="Search..." />
-                    <select id="timeFilter">
-                        <option value="">All Times</option>
-                        <option value="AM">AM</option>
-                        <option value="PM">PM</option>
-                    </select>
-                    
-                    <select id="specialtyFilter">
-                        <option value="">All Specialties</option>
-                        <option value="Cardiologist">Cardiologist</option>
-                        <option value="Dermatologist">Dermatologist</option>
-                        <option value="Neurologist">Neurologist</option>
-                        <option value="Pediatrician">Pediatrician</option>
-                        <option value="Orthopedic">Orthopedic</option>
-                        <option value="Gynecologist">Gynecologist</option>
-                        <option value="Psychiatrist">Psychiatrist</option>
-                        <option value="Dentist">Dentist</option>
-                        <option value="Ophthalmologist">Ophthalmologist</option>
-                        <option value="Ent">ENT Specialist</option>
-                        <option value="Urologist">Urologist</option>
-                        <option value="Oncologist">Oncologist</option>
-                        <option value="Gastroenterologist">Gastroenterologist</option>
-                        <option value="General">General Physician</option>
-                       
-                    </select>
-
+                    <input class="searchBar" type="text" id="searchBar" placeholder="Search by doctor name" />
+                    <div class="filter-wrapper">
+                        <select class="filter-select" id="filterTime">
+                            <option value="">Sort by Time</option>
+                            <option value="AM">AM</option>
+                            <option value="PM">PM</option>
+                        </select>
+                        <select class="filter-select" id="filterSpecialty">
+                            <option value="">Filter by Specialty</option>
+                            <option value="Cardiologist">Cardiologist</option>
+                            <option value="Dermatologist">Dermatologist</option>
+                            <option value="Neurologist">Neurologist</option>
+                            <option value="Pediatrician">Pediatrician</option>
+                            <option value="Orthopedic">Orthopedic</option>
+                            <option value="Gynecologist">Gynecologist</option>
+                            <option value="Psychiatrist">Psychiatrist</option>
+                            <option value="Dentist">Dentist</option>
+                            <option value="Ophthalmologist">Ophthalmologist</option>
+                            <option value="Ent">ENT Specialist</option>
+                            <option value="Urologist">Urologist</option>
+                            <option value="Oncologist">Oncologist</option>
+                            <option value="Gastroenterologist">Gastroenterologist</option>
+                            <option value="General">General Physician</option>
+                        </select>
+                    </div>
                     <div id="content"></div>
                     
                 </main>      
-                
+    
                 <div id="footer"></div>
 
             </div>
@@ -168,8 +167,8 @@ with search, filter, and modal functionality.
             </div>
         </div>
 
-        <script type="module" src="../../static/js/adminDashboard.js" defer></script>
-        <script type="module" src="../../static/js/components/doctorCard.js" defer></script>
+        <script type="module" src="/js/adminDashboard.js" defer></script>
+        <script type="module" src="/js/components/doctorCard.js" defer></script>
 
     </body>
 

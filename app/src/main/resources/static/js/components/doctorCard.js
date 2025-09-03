@@ -58,11 +58,11 @@ export function createDoctorCard(doctor) {
     name.textContent = doctor.name;
 
     const specialization = document.createElement("p");
-    specialization.textContent = doctor.specialization;
+    specialization.textContent = doctor.specialty;
     const email = document.createElement("p");
     email.textContent = doctor.email;
     const availability = document.createElement("p");
-    availability.textContent = doctor.availability.join(', ');
+    availability.textContent = doctor.availableTimes.join(', ');
 
     infoDiv.appendChild(name);
     infoDiv.appendChild(specialization);

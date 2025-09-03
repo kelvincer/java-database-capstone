@@ -380,3 +380,13 @@
   accent-color: #015c5db8; 
 }
 
+.logo-section {
+  display: flex;
+  align-items: center; /* vertically center items */
+  justify-content: center; /* optional: horizontally center inside parent */
+  height: 100%; /* make sure it spans full height of its container */
+}
+
+.logo-title {
+  margin-left: 8px;
+}

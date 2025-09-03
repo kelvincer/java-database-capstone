@@ -1,6 +1,5 @@
 package com.project.back_end.models;
 
-import java.beans.Transient;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;

@@ -112,9 +112,9 @@ and triggers modal-based login functionality.
     <link rel="icon" type="image/svg+xml" href="./assets/images/logo/logo.png" />
     <link rel="stylesheet" href="./assets/css/index.css">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <script src="./js/util.js" defer></script>
-    <script src="./js/render.js" defer></script>
-    <script src="./js/components/header.js" defer></script>
+    <script type="module" src="./js/util.js" defer></script>
+    <script type="module" src="./js/render.js" defer></script>
+    <script type="module" src="./js/components/header.js" defer></script>
     <script src="./js/components/footer.js" defer></script>
 
 </head>
@@ -125,9 +125,9 @@ and triggers modal-based login functionality.
                 <div id="header"></div>
                 <main class="main-content">
                     <h2>Select Your Role</h2>
-                    <button type="button" id="btn-admin">Admin</button>
-                    <button type="button" id="btn-doctor">Doctor</button>
-                    <button type="button" id="btn-patient">Patient</button>
+                    <button type="button" id="adminLogin">Admin</button>
+                    <button type="button" id="doctorLogin">Doctor</button>
+                    <button type="button" id="patientLogin">Patient</button>
                 </main>
 
 

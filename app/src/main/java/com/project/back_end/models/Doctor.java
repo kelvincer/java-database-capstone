@@ -3,6 +3,7 @@ package com.project.back_end.models;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -109,7 +110,7 @@ public class Doctor {
     // - The @ElementCollection annotation ensures that the list of time slots is
     // stored as a separate collection in the database.
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> availableTimes;
 
     // 8. Getters and Setters:
